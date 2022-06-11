@@ -1,8 +1,8 @@
 package tacos.data;
 
 import java.sql.Types;
+import java.time.LocalDateTime;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,7 +44,7 @@ public class JdbcOrderRepository implements OrderRepository {
     );
     pscf.setReturnGeneratedKeys(true);
 
-    order.setPlacedAt(new Date());
+    order.setPlacedAt(LocalDateTime.now());
     PreparedStatementCreator psc =
         pscf.newPreparedStatementCreator(
             Arrays.asList(
@@ -73,7 +73,7 @@ public class JdbcOrderRepository implements OrderRepository {
   }
 
   private long saveTaco(Long orderId, int orderKey, Taco taco) {
-    taco.setCreatedAt(new Date());
+    taco.setCreatedAt(LocalDateTime.now());
     PreparedStatementCreatorFactory pscf =
             new PreparedStatementCreatorFactory(
         "insert into Taco "
@@ -130,7 +130,7 @@ public class JdbcOrderRepository implements OrderRepository {
             tacoOrder.setCcNumber(row.getString("cc_number"));
             tacoOrder.setCcExpiration(row.getString("cc_expiration"));
             tacoOrder.setCcCVV(row.getString("cc_cvv"));
-            tacoOrder.setPlacedAt(new Date(row.getTimestamp("placed_at").getTime()));
+            tacoOrder.setPlacedAt(row.getTimestamp("placed_at").toLocalDateTime());
             tacoOrder.setTacos(findTacosByOrderId(row.getLong("id")));
             return tacoOrder;
           }, id);
@@ -148,7 +148,7 @@ public class JdbcOrderRepository implements OrderRepository {
           Taco taco = new Taco();
           taco.setId(row.getLong("id"));
           taco.setName(row.getString("name"));
-          taco.setCreatedAt(new Date(row.getTimestamp("created_at").getTime()));
+          taco.setCreatedAt(row.getTimestamp("created_at").toLocalDateTime());
           taco.setIngredients(findIngredientsByTacoId(row.getLong("id")));
           return taco;
         },

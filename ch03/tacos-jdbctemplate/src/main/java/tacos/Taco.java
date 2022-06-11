@@ -1,6 +1,6 @@
 package tacos;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.validation.constraints.NotNull;
@@ -13,7 +13,7 @@ public class Taco {
 
   private Long id;
 
-  private Date createdAt = new Date();
+  private LocalDateTime createdAt = LocalDateTime.now();
 
   @NotNull
   @Size(min=5, message="Name must be at least 5 characters long")

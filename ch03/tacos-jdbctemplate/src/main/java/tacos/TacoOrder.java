@@ -1,7 +1,7 @@
 package tacos;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.validation.constraints.Digits;
@@ -19,7 +19,7 @@ public class TacoOrder implements Serializable {
 
   private Long id;
 
-  private Date placedAt;
+  private LocalDateTime placedAt;
 
 
   @NotBlank(message="Delivery name is required")
