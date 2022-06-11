@@ -1,17 +1,18 @@
 package tacos;
 
-import java.util.concurrent.TimeUnit;
+import java.time.Duration;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
-import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+import tacos.util.MyHtmlUnitDriver;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment=WebEnvironment.RANDOM_PORT)
@@ -19,14 +20,14 @@ public class HomePageBrowserTest {
 
   @LocalServerPort
   private int port;
-  private static HtmlUnitDriver browser;  
+  private static MyHtmlUnitDriver browser;  
   
   @BeforeAll
   public static void setup() {
-    browser = new HtmlUnitDriver();
+    browser = new MyHtmlUnitDriver();
     
     browser.manage().timeouts()
-          .implicitlyWait(10, TimeUnit.SECONDS);
+          .implicitlyWait(Duration.ofSeconds(10));
   }
   
   @AfterAll
