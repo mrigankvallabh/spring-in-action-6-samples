@@ -1,7 +1,7 @@
 package tacos;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -31,7 +31,7 @@ public class TacoOrder implements Serializable {
   @GeneratedValue(strategy=GenerationType.AUTO)
   private Long id;
 
-  private Date placedAt;
+  private LocalDateTime placedAt;
 
   @ManyToOne
   private User user;
@@ -70,7 +70,7 @@ public class TacoOrder implements Serializable {
 
   @PrePersist
   void placedAt() {
-    this.placedAt = new Date();
+    this.placedAt = LocalDateTime.now();
   }
 
 }

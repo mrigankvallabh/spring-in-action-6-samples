@@ -1,5 +1,5 @@
 package tacos;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -25,7 +25,7 @@ public class Taco {
   @Size(min=5, message="Name must be at least 5 characters long")
   private String name;
   
-  private Date createdAt;
+  private LocalDateTime createdAt;
 
   @ManyToMany(targetEntity=Ingredient.class)
   @Size(min=1, message="You must choose at least 1 ingredient")
@@ -33,6 +33,6 @@ public class Taco {
 
   @PrePersist
   void createdAt() {
-    this.createdAt = new Date();
+    this.createdAt = LocalDateTime.now();
   }
 }

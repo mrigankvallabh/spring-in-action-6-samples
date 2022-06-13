@@ -88,7 +88,7 @@ public class DesignTacoController {
       @Valid Taco taco, Errors errors,
       @ModelAttribute TacoOrder order) {
 
-    log.info("   --- Saving taco");
+    log.info("Saving taco {}", taco);
 
     if (errors.hasErrors()) {
       return "design";
